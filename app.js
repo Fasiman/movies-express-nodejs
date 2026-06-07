@@ -43,6 +43,6 @@ app.use((req, res) => {
   res.status(404).json({"message": "404 not found. Сформуйте правильний маршрут!"})
 })
 
-app.listen(3000, () => {
+app.listen(3006, () => {
   console.log("сервер запустився");
 });

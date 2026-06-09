@@ -1,11 +1,11 @@
 // const express = require('express') commonjs
 
-import moviesRouter from "./routes/moviesRoutes.js";
-import productsRouter from "./routes/productsRoutes.js";
-import testRouter from "./routes/testRoutes.js";
+import moviesRouter from "./src/routes/moviesRoutes.js";
+import productsRouter from "./src/routes/productsRoutes.js";
+import testRouter from "./src/routes/testRoutes.js";
 
-import { movies } from "./data/movies.js";
-import { products } from "./data/products.js";
+import { movies } from "./src/data/movies.js";
+import { products } from "./src/data/products.js";
 
 import express from "express";
 import cors from "cors"
@@ -28,7 +28,7 @@ app.use(cors()) // скоротимо
 
 // app.set("json spaces", 2);
 
-app.use(moviesRouter)
+app.use("/movies", moviesRouter)
 // app.use("/products", productsRouter)
 // app.use("/test", testRouter)
 

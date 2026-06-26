@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   const status = err.status || 500;
-  res.status(status).json({ message: err.message || "Internal Server Error" });
+  res.status(status).json({ message: err.message || " Server Error" });
 });
 
 app.listen(3006, () => {

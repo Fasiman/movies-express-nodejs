@@ -9,17 +9,17 @@ export const getMovies = (req, res) => {
 };
 
 export const addMovies = async (req, res, next) => {
-  // try {
-  //   const { error } = movieCreateSchema.validate(req.body);
-  //   if (error) {
-  //     throw HttpError(400, error.message);
-  //   }
+  try {
+    const { error } = movieCreateSchema.validate(req.body);
+    if (error) {
+      throw HttpError(400, error.message);
+    }
 
-  //   const result = addMovie(req.body);
-  //   res.status(201).json(result);
-  // } catch (error) {
-  //   next(error);
-  // }
+    const result = addMovie(req.body);
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const deleteMovies = async (req, res, next) => {

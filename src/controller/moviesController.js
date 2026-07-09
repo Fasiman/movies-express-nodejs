@@ -1,10 +1,17 @@
-import { movies } from "../data/movies.js";
 import { movieCreateSchema, movieDeleteSchema } from "../schemas/moviesSchemas.js";
 import HttpError from "../helpers/HttpError.js";
 import { addMovie, deleteMovie } from "../services/moviesServices.js";
 import ctrlWrapper from "../decorators/ctrlWrapper.js";
+import { readFile } from "fs/promises";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const dataPath = path.join(__dirname, "../data/movies.json");
 
 const getMovies = async (req, res) => {
+  const data = await readFile(dataPath, "utf-8");
+  const movies = JSON.parse(data);
   res.status(200).json(movies);
 };
 
@@ -14,7 +21,7 @@ const addMovies = async (req, res) => {
     throw HttpError(400, error.message);
   }
 
-  const result = addMovie(req.body);
+  const result = await addMovie(req.body);
   res.status(201).json(result);
 };
 
@@ -24,7 +31,7 @@ const deleteMovies = async (req, res) => {
     throw HttpError(400, error.message);
   }
 
-  const result = deleteMovie(req.params.id);
+  const result = await deleteMovie(req.params.id);
   res.status(200).json({ message: "Movie deleted", movie: result });
 };
 

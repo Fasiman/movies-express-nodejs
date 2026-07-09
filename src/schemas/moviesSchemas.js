@@ -7,5 +7,5 @@ export const movieCreateSchema = Joi.object({
 });
 
 export const movieDeleteSchema = Joi.object({
-  id: Joi.number().required(),
+  id: Joi.string().required(),
 });

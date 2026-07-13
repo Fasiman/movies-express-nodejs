@@ -1,13 +1,8 @@
 [
-    {
+  {
     "id": 1,
     "title": "Cars",
     "author": "Pixar"
-  },
-  {
-    "id": 2,
-    "title": "Avatar",
-    "author": "Cameron"
   },
   {
     "id": 3,
@@ -16,7 +11,7 @@
   },
   {
     "id": 4,
-    "title": "Titanic",
-    "author": "Universal"
+    "title": "Фильм",
+    "author": "Яков"
   }
 ]

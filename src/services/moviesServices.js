@@ -1,5 +1,5 @@
 import HttpError from "../helpers/HttpError.js";
-import { readFile, writeFile } from "fs/promises";
+import { readFile, writeFile, open } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -12,7 +12,19 @@ const readData = async () => {
 };
 
 const writeData = async (data) => {
-  await writeFile(dataPath, JSON.stringify(data, null, 2));
+  // Пишем изменения и принудительно синхронизируем на диск,
+  // чтобы они сохранялись сразу, без задержек ОС на кэширование.
+  const json = JSON.stringify(data, null, 2);
+
+  // Открываем файл в режиме записи, затем вызываем fsync
+  // через FileHandle.sync() перед закрытием файла.
+  const file = await open(dataPath, "w");
+  try {
+    await file.writeFile(json);
+    await file.sync();
+  } finally {
+    await file.close();
+  }
 };
 
 export const addMovie = async (movie) => {
